@@ -1,10 +1,12 @@
 import streamlit as st
-import streamlit_card
-from streamlit_card import card
-import base64
+import streamlit_card as stcard
+from streamlit_timeline import timeline
+from streamlit_lottie import st_lottie
+import requests
+import json
 
-# Set page config
-st.set_page_config(page_title="AI Engineer Portfolio", page_icon="🎨🤖", layout="wide")
+# Page config
+st.set_page_config(page_title="AI Designer Portfolio", page_icon="🎨🤖", layout="wide")
 
 # Custom CSS
 def local_css(file_name):
@@ -13,76 +15,119 @@ def local_css(file_name):
 
 local_css("style.css")
 
-# Header
-st.markdown("<h1 class='gradient-text'>From Pixels to Neurons: My AI Journey</h1>", unsafe_allow_html=True)
-st.subheader("A Creative AI Engineer's Portfolio")
+# Load Lottie animation
+def load_lottieurl(url):
+    r = requests.get(url)
+    if r.status_code != 200:
+        return None
+    return r.json()
+
+lottie_coding = load_lottieurl("https://assets5.lottiefiles.com/packages/lf20_fcfjwiyb.json")
+
+# Hero Section
+st.markdown("<div class='hero'>", unsafe_allow_html=True)
+col1, col2 = st.columns([2, 1])
+with col1:
+    st.markdown("<h1 class='gradient-text'>AI-Powered Design Innovation</h1>", unsafe_allow_html=True)
+    st.markdown("<p class='subheader'>Bridging the gap between stunning visuals and cutting-edge AI</p>", unsafe_allow_html=True)
+with col2:
+    st_lottie(lottie_coding, height=300, key="coding")
+st.markdown("</div>", unsafe_allow_html=True)
 
 # About Me
 st.markdown("## About Me")
-col1, col2 = st.columns([1, 2])
-with col1:
-    st.image("https://via.placeholder.com/300x300.png?text=Your+Image+Here", width=300)
-with col2:
-    st.markdown("""
-    👋 Hello! I'm [Your Name], a graphic designer who fell in love with the world of AI.
-    
-    🎨 My background in design gives me a unique perspective on AI development, allowing me to create
-    intuitive and visually appealing AI solutions.
-    
-    🤖 Now, I'm on a mission to blend creativity with cutting-edge AI technology to build innovative
-    applications that are not only powerful but also beautiful and user-friendly.
-    """)
+st.markdown("""
+As a product designer with a passion for AI, I bring a unique blend of creativity and technical expertise to every project. 
+My journey from crafting pixel-perfect designs to developing neural networks has equipped me with a holistic understanding of both form and function.
+
+I specialize in creating AI-powered applications that are not only intelligent but also intuitive and visually captivating. 
+My mission is to push the boundaries of what's possible at the intersection of design and artificial intelligence.
+""")
+
+# Timeline
+st.markdown("## My Journey")
+timeline_data = [
+    {"id": 1, "title": "Started as a Product Designer", "content": "Began my career creating user-centric designs for various digital products", "year": "2015"},
+    {"id": 2, "title": "Discovered AI", "content": "Became fascinated with the potential of AI in design and started learning", "year": "2018"},
+    {"id": 3, "title": "Transition to AI Engineering", "content": "Started applying AI concepts to enhance design processes and user experiences", "year": "2020"},
+    {"id": 4, "title": "AI-Powered Design Innovation", "content": "Now creating cutting-edge applications that blend beautiful design with powerful AI capabilities", "year": "Present"}
+]
+timeline(timeline_data, height=400)
 
 # Skills
 st.markdown("## Skills")
 col1, col2 = st.columns(2)
 with col1:
     st.markdown("### Design")
-    st.markdown("- Adobe Creative Suite")
-    st.markdown("- UI/UX Design")
-    st.markdown("- Visual Communication")
-    st.markdown("- Brand Identity")
+    st.markdown("""
+    <div class="skill-bar">
+        <div class="skill" style="width:95%;">UI/UX Design 95%</div>
+    </div>
+    <div class="skill-bar">
+        <div class="skill" style="width:90%;">Visual Communication 90%</div>
+    </div>
+    <div class="skill-bar">
+        <div class="skill" style="width:85%;">Prototyping 85%</div>
+    </div>
+    """, unsafe_allow_html=True)
 with col2:
     st.markdown("### AI & Programming")
-    st.markdown("- Python")
-    st.markdown("- Machine Learning")
-    st.markdown("- Deep Learning")
-    st.markdown("- Computer Vision")
-    st.markdown("- Natural Language Processing")
+    st.markdown("""
+    <div class="skill-bar">
+        <div class="skill" style="width:85%;">Python 85%</div>
+    </div>
+    <div class="skill-bar">
+        <div class="skill" style="width:80%;">Machine Learning 80%</div>
+    </div>
+    <div class="skill-bar">
+        <div class="skill" style="width:75%;">Deep Learning 75%</div>
+    </div>
+    """, unsafe_allow_html=True)
 
 # Projects
 st.markdown("## Projects")
 col1, col2 = st.columns(2)
 
 with col1:
-    card(
-        title="AI Art Generator",
-        text="A Streamlit app that generates AI art using GANs",
-        image="https://via.placeholder.com/300x200.png?text=AI+Art+Generator",
+    stcard.card(
+        title="AI-Powered Design Assistant",
+        text="An intelligent tool that assists designers in creating harmonious color schemes and layouts",
+        image="https://via.placeholder.com/300x200.png?text=AI+Design+Assistant",
         url="https://your-streamlit-app-url.com",
     )
-    st.markdown("[GitHub Repo](https://github.com/yourusername/ai-art-generator)")
+    st.markdown("[GitHub Repo](https://github.com/yourusername/ai-design-assistant)")
 
 with col2:
-    card(
-        title="Sentiment Analysis Dashboard",
-        text="Real-time sentiment analysis of social media posts",
-        image="https://via.placeholder.com/300x200.png?text=Sentiment+Analysis",
+    stcard.card(
+        title="Generative Art Platform",
+        text="A platform that uses GANs to create unique, AI-generated artworks based on user inputs",
+        image="https://via.placeholder.com/300x200.png?text=Generative+Art+Platform",
         url="https://your-streamlit-app-url.com",
     )
-    st.markdown("[GitHub Repo](https://github.com/yourusername/sentiment-analysis)")
+    st.markdown("[GitHub Repo](https://github.com/yourusername/generative-art-platform)")
 
-# Add more projects as needed
+# Contact Form
+st.markdown("## Let's Connect")
+contact_form = """
+<form action="https://formsubmit.co/your@email.com" method="POST">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="text" name="name" placeholder="Your name" required>
+    <input type="email" name="email" placeholder="Your email" required>
+    <textarea name="message" placeholder="Your message here"></textarea>
+    <button type="submit">Send</button>
+</form>
+"""
+st.markdown(contact_form, unsafe_allow_html=True)
 
-# Contact
-st.markdown("## Let's Connect!")
+# Social Links
 st.markdown("""
-- 📧 Email: your.email@example.com
-- 🐦 Twitter: [@yourhandle](https://twitter.com/yourhandle)
-- 💼 LinkedIn: [Your Name](https://www.linkedin.com/in/yourprofile)
-- 🐙 GitHub: [yourusername](https://github.com/yourusername)
-""")
+<div class="social-links">
+    <a href="https://twitter.com/yourhandle" target="_blank"><i class="fab fa-twitter"></i></a>
+    <a href="https://linkedin.com/in/yourprofile" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
+</div>
+""", unsafe_allow_html=True)
 
 # Footer
 st.markdown("---")
-st.markdown("Built with ❤️ using Streamlit")
+st.markdown("<p class='footer'>© 2023 Your Name. All rights reserved.</p>", unsafe_allow_html=True)
