@@ -1,6 +1,8 @@
 import streamlit as st
 from streamlit_extras.switch_page_button import switch_page
 from streamlit_custom_components import parallax_hero
+#import streamlit.components.v1 as components
+
 
 # Page config
 st.set_page_config(page_title="Apple Vision Pro", page_icon="🥽", layout="wide")
