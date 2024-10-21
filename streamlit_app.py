@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit_card
 from streamlit_card import card
 import base64
 
