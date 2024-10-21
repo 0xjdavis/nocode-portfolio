@@ -1,0 +1,95 @@
+/* Custom fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* General styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+/* Gradient text effect for main title */
+.gradient-text {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 3rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Custom styles for Streamlit elements */
+.stApp {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.stButton > button {
+    background-color: #4ecdc4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.stButton > button:hover {
+    background-color: #45b7d1;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom card styles */
+.streamlit-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.streamlit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Skills section */
+.stMarkdown h3 {
+    color: #45b7d1;
+    font-weight: 600;
+}
+
+.stMarkdown ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.stMarkdown ul li::before {
+    content: "▹";
+    color: #4ecdc4;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+/* Contact section */
+.stMarkdown a {
+    color: #ff6b6b;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.stMarkdown a:hover {
+    color: #4ecdc4;
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9rem;
+    color: #777;
+}
