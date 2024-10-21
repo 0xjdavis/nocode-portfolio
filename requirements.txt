@@ -3,4 +3,5 @@ streamlit-card
 streamlit-timeline
 streamlit-lottie
 streamlit_extras
+streamlit_custom_components
 requests
